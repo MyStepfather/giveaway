@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../components/Modal/modal";
 import styles from './home.module.css'
+import { useNavigate } from "react-router";
 
 export const HomePage = () => {
 
 	const [isModalShow, setIsModalShow] = useState<boolean>(false);
 	const [isConfirm, setIsConfirm] = useState<boolean>(false);
+
+	const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            navigate('/login');
+        }
+    }, [navigate]);
 
 	return (
 		<div className="content">
