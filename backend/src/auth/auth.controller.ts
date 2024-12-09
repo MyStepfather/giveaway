@@ -10,7 +10,7 @@ export class AuthController {
 	@HttpCode(200)
 	@Post('login')
 	async login(@Body() dto: AuthDto) {
-		const { login } = await this.authService.validateUser(dto);
-		return this.authService.login(login);
+		const { id } = await this.authService.validateUser(dto);
+		return this.authService.login(id);
 	}
 }

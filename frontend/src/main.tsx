@@ -5,15 +5,25 @@ import { HomePage } from './pages/Home/home.page.tsx'
 import { LoginPage } from './pages/Login/login.page.tsx'
 import { MainLayout } from './layout/main-layout.tsx'
 import { RouterProvider } from 'react-router/dom'
+import { AuthProvider } from './context/authProvider.tsx'
+import ProtectedRoute from './components/ProtectedRout/ProtectedRoute.tsx'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <MainLayout />,
+		element: (
+			<AuthProvider>
+				<MainLayout />
+			</AuthProvider>
+		),
 		children: [
 			{
 				path: '/',
-				element: <HomePage />
+				element: (
+					<ProtectedRoute>
+						<HomePage />
+					</ProtectedRoute>
+				)
 			},
 			{
 				path: '/login',
@@ -24,5 +34,5 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}/>
+	<RouterProvider router={router}/>
 )

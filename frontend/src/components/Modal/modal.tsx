@@ -1,4 +1,4 @@
-import {MouseEvent} from 'react'
+import {MouseEvent, useEffect} from 'react'
 import style from './modal.module.css'
 import cn from 'classnames';
 
@@ -6,6 +6,7 @@ type Props = {
 	isShow: boolean
 	setIsShow: (state: boolean) => void
 	setIsConfirm: (state: boolean) => void;
+	isConfirm: boolean;
 }
 
 export const Modal = ({isShow, setIsShow, setIsConfirm}: Props) => {
@@ -19,7 +20,7 @@ export const Modal = ({isShow, setIsShow, setIsConfirm}: Props) => {
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
 	if (e.target === e.currentTarget) {
 		setIsShow(false);
-		setIsConfirm(true);
+		setIsConfirm(true)
 	}
   }
 

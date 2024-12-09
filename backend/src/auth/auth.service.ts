@@ -18,16 +18,20 @@ export class AuthService {
 
 	async validateUser({ login, password }: AuthDto) {
 		const user = await this.findUser(login);
+		console.log(user);
+
 		if (!user) throw new NotFoundException('Пользователь не найден');
 
 		const isCorrectPassword = await compare(password, user.passwordHash);
 		if (!isCorrectPassword) throw new UnauthorizedException('Неправильный пароль');
 
-		return { login: user.login };
+		return {
+			id: user.id,
+		};
 	}
 
-	async login(login: string) {
-		const payload = { login };
+	async login(id: number) {
+		const payload = { id };
 		return {
 			access_token: await this.jwtService.signAsync(payload),
 		};
