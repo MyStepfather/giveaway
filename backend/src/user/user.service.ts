@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class UserService {
 	constructor(private readonly prisma: PrismaService) {}
-	async update(id: number, dto: Partial<User>) {
+	async update(id: number, dto: Partial<User>) {		
 		return await this.prisma.user.update({ where: { id }, data: dto });
 	}
 }
